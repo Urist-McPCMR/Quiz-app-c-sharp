@@ -33,7 +33,8 @@ namespace WebApplication1.Account
                 if (user != null)
                 {
                     IdentityHelper.SignIn(manager, user, RememberMe.Checked);
-                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["About.aspx"], Response);
+                    
                 }
                 else
                 {

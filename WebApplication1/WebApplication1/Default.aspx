@@ -2,41 +2,71 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+    
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
-    </div>
+         <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                         <div class="jumbotron">
+                        <h1>Quiz App Management</h1>
+                        <p class="lead">Please log in in to access the quiz management system</p>
+                        <p><a href="Account/Login.aspx" class="btn btn-primary btn-lg">Log in &raquo;</a></p>
+                        </div>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                           <h2>Import Student</h2>
+                            <form action="http://www.cs.tut.fi/cgi-bin/run/~jkorpela/echo.cgi"
+                            enctype="multipart/form-data" method="post">
+                          
+                            <p style="float:left;">
+                           
+                            <input  type="file" name="datafile" size="40">
+                            </p>
+                            <div style="float:left;">
+                            <input type="submit" value="Upload">
+                            </div>
+                                <div style="clear:both;">
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
+                               <h2>Import Lecturer</h2>
+                            <form action="http://www.cs.tut.fi/cgi-bin/run/~jkorpela/echo.cgi"
+                            enctype="multipart/form-data" method="post">
+                          
+                            <p style="float:left;">
+                           
+                            <input  type="file" name="datafile" size="40">
+                            </p>
+                            <div style="float:left;">
+                            <input type="submit" value="Upload">
+                            </div>
+                                <div style="clear:both;">
+                            </form>
+                                <br />
+                            <br />
+                            <br />
+                            <hr />
+                               <h2>Import Unit</h2>
+                            <form action="http://www.cs.tut.fi/cgi-bin/run/~jkorpela/echo.cgi"
+                            enctype="multipart/form-data" method="post">
+                          
+                            <p style="float:left;">
+                           
+                            <input  type="file" name="datafile" size="40">
+                            </p>
+                            <div style="float:left;">
+                            <input type="submit" value="Upload">
+                            </div>
+                                <div style="clear:both;">
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                            
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+
+
 
 </asp:Content>
