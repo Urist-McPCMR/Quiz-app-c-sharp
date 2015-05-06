@@ -1,20 +1,15 @@
-﻿using System;
-using System.Data.Entity;
-
+﻿
 namespace QuizApp.Models
 {
 
     public class Student
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
     }
 
-    public class QuizDBContext : DbContext
-    {
-        public DbSet<Student> Students { get; set; }
-    }
 }
