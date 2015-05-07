@@ -11,107 +11,107 @@ using QuizApp.Models;
 
 namespace QuizApp.Controllers
 {
-    public class AnswerController : Controller
+    public class UnitsController : Controller
     {
         private QuizContext db = new QuizContext();
 
-        // GET: Answer
+        // GET: Units
         public ActionResult Index()
         {
-            return View(db.Answers.ToList());
+            return View(db.Units.ToList());
         }
 
-        // GET: Answer/Details/5
+        // GET: Units/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Answer answer = db.Answers.Find(id);
-            if (answer == null)
+            Unit unit = db.Units.Find(id);
+            if (unit == null)
             {
                 return HttpNotFound();
             }
-            return View(answer);
+            return View(unit);
         }
 
-        // GET: Answer/Create
+        // GET: Units/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Answer/Create
+        // POST: Units/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title")] Answer answer)
+        public ActionResult Create([Bind(Include = "ID,Name")] Unit unit)
         {
             if (ModelState.IsValid)
             {
-                db.Answers.Add(answer);
+                db.Units.Add(unit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(answer);
+            return View(unit);
         }
 
-        // GET: Answer/Edit/5
+        // GET: Units/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Answer answer = db.Answers.Find(id);
-            if (answer == null)
+            Unit unit = db.Units.Find(id);
+            if (unit == null)
             {
                 return HttpNotFound();
             }
-            return View(answer);
+            return View(unit);
         }
 
-        // POST: Answer/Edit/5
+        // POST: Units/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title")] Answer answer)
+        public ActionResult Edit([Bind(Include = "ID,Name")] Unit unit)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(answer).State = EntityState.Modified;
+                db.Entry(unit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(answer);
+            return View(unit);
         }
 
-        // GET: Answer/Delete/5
+        // GET: Units/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Answer answer = db.Answers.Find(id);
-            if (answer == null)
+            Unit unit = db.Units.Find(id);
+            if (unit == null)
             {
                 return HttpNotFound();
             }
-            return View(answer);
+            return View(unit);
         }
 
-        // POST: Answer/Delete/5
+        // POST: Units/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Answer answer = db.Answers.Find(id);
-            db.Answers.Remove(answer);
+            Unit unit = db.Units.Find(id);
+            db.Units.Remove(unit);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

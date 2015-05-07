@@ -107,4 +107,3 @@ C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\bin\Microsoft
 C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.dll
 C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.pdb
-C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.csprojResolveAssemblyReference.cache

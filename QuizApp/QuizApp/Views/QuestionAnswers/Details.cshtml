@@ -1,4 +1,4 @@
-﻿@model QuizApp.Models.Answer
+﻿@model QuizApp.Models.QuestionAnswer
 
 @{
     ViewBag.Title = "Details";
@@ -7,15 +7,15 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Answer</h4>
+    <h4>QuestionAnswer</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Answer)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Answer)
         </dd>
 
     </dl>
