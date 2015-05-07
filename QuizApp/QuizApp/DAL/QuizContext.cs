@@ -13,6 +13,7 @@ namespace QuizApp.DAL
         public DbSet<Student> Students { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<Lecturer> Lecturers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
