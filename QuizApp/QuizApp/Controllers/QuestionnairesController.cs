@@ -11,107 +11,112 @@ using QuizApp.Models;
 
 namespace QuizApp.Controllers
 {
-    public class QuestianneiresController : Controller
+    public class QuestionnairesController : Controller
     {
         private QuizContext db = new QuizContext();
 
-        // GET: Questianneires
+        // GET: Questionnaires
         public ActionResult Index()
         {
-            return View(db.Questianneires.ToList());
+            var questionnaires = db.Questionnaires.Include(q => q.Unit);
+            return View(questionnaires.ToList());
         }
 
-        // GET: Questianneires/Details/5
+        // GET: Questionnaires/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Questianneire questianneire = db.Questianneires.Find(id);
-            if (questianneire == null)
+            Questionnaire questionnaire = db.Questionnaires.Find(id);
+            if (questionnaire == null)
             {
                 return HttpNotFound();
             }
-            return View(questianneire);
+            return View(questionnaire);
         }
 
-        // GET: Questianneires/Create
+        // GET: Questionnaires/Create
         public ActionResult Create()
         {
+            ViewBag.UnitID = new SelectList(db.Units, "ID", "Name");
             return View();
         }
 
-        // POST: Questianneires/Create
+        // POST: Questionnaires/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] Questianneire questianneire)
+        public ActionResult Create([Bind(Include = "ID,Name,EndDate,UnitID")] Questionnaire questionnaire)
         {
             if (ModelState.IsValid)
             {
-                db.Questianneires.Add(questianneire);
+                db.Questionnaires.Add(questionnaire);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(questianneire);
+            ViewBag.UnitID = new SelectList(db.Units, "ID", "Name", questionnaire.UnitID);
+            return View(questionnaire);
         }
 
-        // GET: Questianneires/Edit/5
+        // GET: Questionnaires/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Questianneire questianneire = db.Questianneires.Find(id);
-            if (questianneire == null)
+            Questionnaire questionnaire = db.Questionnaires.Find(id);
+            if (questionnaire == null)
             {
                 return HttpNotFound();
             }
-            return View(questianneire);
+            ViewBag.UnitID = new SelectList(db.Units, "ID", "Name", questionnaire.UnitID);
+            return View(questionnaire);
         }
 
-        // POST: Questianneires/Edit/5
+        // POST: Questionnaires/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] Questianneire questianneire)
+        public ActionResult Edit([Bind(Include = "ID,Name,EndDate,UnitID")] Questionnaire questionnaire)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(questianneire).State = EntityState.Modified;
+                db.Entry(questionnaire).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(questianneire);
+            ViewBag.UnitID = new SelectList(db.Units, "ID", "Name", questionnaire.UnitID);
+            return View(questionnaire);
         }
 
-        // GET: Questianneires/Delete/5
+        // GET: Questionnaires/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Questianneire questianneire = db.Questianneires.Find(id);
-            if (questianneire == null)
+            Questionnaire questionnaire = db.Questionnaires.Find(id);
+            if (questionnaire == null)
             {
                 return HttpNotFound();
             }
-            return View(questianneire);
+            return View(questionnaire);
         }
 
-        // POST: Questianneires/Delete/5
+        // POST: Questionnaires/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Questianneire questianneire = db.Questianneires.Find(id);
-            db.Questianneires.Remove(questianneire);
+            Questionnaire questionnaire = db.Questionnaires.Find(id);
+            db.Questionnaires.Remove(questionnaire);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

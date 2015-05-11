@@ -47,7 +47,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Email,Password,IsAdm")] Lecturer lecturer)
+        public ActionResult Create([Bind(Include = "ID,LecturerNumber,FirstName,LastName,Email,Password,IsAdm")] Lecturer lecturer)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,Password,IsAdm")] Lecturer lecturer)
+        public ActionResult Edit([Bind(Include = "ID,LecturerNumber,FirstName,LastName,Email,Password,IsAdm")] Lecturer lecturer)
         {
             if (ModelState.IsValid)
             {

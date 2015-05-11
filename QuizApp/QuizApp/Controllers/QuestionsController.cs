@@ -18,7 +18,8 @@ namespace QuizApp.Controllers
         // GET: Questions
         public ActionResult Index()
         {
-            return View(db.Questions.ToList());
+            var questions = db.Questions.Include(q => q.TypeQuestion);
+            return View(questions.ToList());
         }
 
         // GET: Questions/Details/5
@@ -39,6 +40,7 @@ namespace QuizApp.Controllers
         // GET: Questions/Create
         public ActionResult Create()
         {
+            ViewBag.TypeQuestionID = new SelectList(db.TypeQuestions, "ID", "Type");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,CorrectAnswer")] Question question)
+        public ActionResult Create([Bind(Include = "QuestionID,Title,CorrectAnswer,TypeQuestionID")] Question question)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace QuizApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.TypeQuestionID = new SelectList(db.TypeQuestions, "ID", "Type", question.TypeQuestionID);
             return View(question);
         }
 
@@ -71,6 +74,7 @@ namespace QuizApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.TypeQuestionID = new SelectList(db.TypeQuestions, "ID", "Type", question.TypeQuestionID);
             return View(question);
         }
 
@@ -79,7 +83,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,CorrectAnswer")] Question question)
+        public ActionResult Edit([Bind(Include = "QuestionID,Title,CorrectAnswer,TypeQuestionID")] Question question)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace QuizApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TypeQuestionID = new SelectList(db.TypeQuestions, "ID", "Type", question.TypeQuestionID);
             return View(question);
         }
 

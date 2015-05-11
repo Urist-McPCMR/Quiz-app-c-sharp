@@ -11,107 +11,116 @@ using QuizApp.Models;
 
 namespace QuizApp.Controllers
 {
-    public class QuestionAnswersController : Controller
+    public class UserAnswersController : Controller
     {
         private QuizContext db = new QuizContext();
 
-        // GET: QuestionAnswers
+        // GET: UserAnswers
         public ActionResult Index()
         {
-            return View(db.QuestionAnswers.ToList());
+            var userAnswers = db.UserAnswers.Include(u => u.Question).Include(u => u.Student);
+            return View(userAnswers.ToList());
         }
 
-        // GET: QuestionAnswers/Details/5
+        // GET: UserAnswers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestionAnswer questionAnswer = db.QuestionAnswers.Find(id);
-            if (questionAnswer == null)
+            UserAnswer userAnswer = db.UserAnswers.Find(id);
+            if (userAnswer == null)
             {
                 return HttpNotFound();
             }
-            return View(questionAnswer);
+            return View(userAnswer);
         }
 
-        // GET: QuestionAnswers/Create
+        // GET: UserAnswers/Create
         public ActionResult Create()
         {
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title");
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName");
             return View();
         }
 
-        // POST: QuestionAnswers/Create
+        // POST: UserAnswers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Answer")] QuestionAnswer questionAnswer)
+        public ActionResult Create([Bind(Include = "StudentID,QuestionID,Answer")] UserAnswer userAnswer)
         {
             if (ModelState.IsValid)
             {
-                db.QuestionAnswers.Add(questionAnswer);
+                db.UserAnswers.Add(userAnswer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(questionAnswer);
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title", userAnswer.QuestionID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName", userAnswer.StudentID);
+            return View(userAnswer);
         }
 
-        // GET: QuestionAnswers/Edit/5
+        // GET: UserAnswers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestionAnswer questionAnswer = db.QuestionAnswers.Find(id);
-            if (questionAnswer == null)
+            UserAnswer userAnswer = db.UserAnswers.Find(id);
+            if (userAnswer == null)
             {
                 return HttpNotFound();
             }
-            return View(questionAnswer);
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title", userAnswer.QuestionID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName", userAnswer.StudentID);
+            return View(userAnswer);
         }
 
-        // POST: QuestionAnswers/Edit/5
+        // POST: UserAnswers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Answer")] QuestionAnswer questionAnswer)
+        public ActionResult Edit([Bind(Include = "StudentID,QuestionID,Answer")] UserAnswer userAnswer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(questionAnswer).State = EntityState.Modified;
+                db.Entry(userAnswer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(questionAnswer);
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title", userAnswer.QuestionID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName", userAnswer.StudentID);
+            return View(userAnswer);
         }
 
-        // GET: QuestionAnswers/Delete/5
+        // GET: UserAnswers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestionAnswer questionAnswer = db.QuestionAnswers.Find(id);
-            if (questionAnswer == null)
+            UserAnswer userAnswer = db.UserAnswers.Find(id);
+            if (userAnswer == null)
             {
                 return HttpNotFound();
             }
-            return View(questionAnswer);
+            return View(userAnswer);
         }
 
-        // POST: QuestionAnswers/Delete/5
+        // POST: UserAnswers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuestionAnswer questionAnswer = db.QuestionAnswers.Find(id);
-            db.QuestionAnswers.Remove(questionAnswer);
+            UserAnswer userAnswer = db.UserAnswers.Find(id);
+            db.UserAnswers.Remove(userAnswer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

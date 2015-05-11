@@ -18,7 +18,8 @@ namespace QuizApp.Controllers
         // GET: Units
         public ActionResult Index()
         {
-            return View(db.Units.ToList());
+            var units = db.Units.Include(u => u.Course);
+            return View(units.ToList());
         }
 
         // GET: Units/Details/5
@@ -39,6 +40,7 @@ namespace QuizApp.Controllers
         // GET: Units/Create
         public ActionResult Create()
         {
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] Unit unit)
+        public ActionResult Create([Bind(Include = "ID,Name,CourseID")] Unit unit)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace QuizApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", unit.CourseID);
             return View(unit);
         }
 
@@ -71,6 +74,7 @@ namespace QuizApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", unit.CourseID);
             return View(unit);
         }
 
@@ -79,7 +83,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] Unit unit)
+        public ActionResult Edit([Bind(Include = "ID,Name,CourseID")] Unit unit)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace QuizApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", unit.CourseID);
             return View(unit);
         }
 

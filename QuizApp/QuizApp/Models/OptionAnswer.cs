@@ -9,5 +9,7 @@ namespace QuizApp.Models
     {
         public int ID { get; set; }
         public string Option { get; set; }
+        public int QuestionID { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

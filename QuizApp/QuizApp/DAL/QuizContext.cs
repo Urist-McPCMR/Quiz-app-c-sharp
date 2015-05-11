@@ -8,11 +8,7 @@ namespace QuizApp.DAL
     {
         public QuizContext() : base("QuizContext")
         {
-        }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
+        }        
 
         public DbSet<Student> Students { get; set; }
 
@@ -22,14 +18,34 @@ namespace QuizApp.DAL
 
         public DbSet<Course> Courses { get; set; }
 
-        public DbSet<Questianneire> Questianneires { get; set; }
-
         public DbSet<Question> Questions { get; set; }
+
+        public DbSet<Questionnaire> Questionnaires { get; set; }
 
         public DbSet<OptionAnswer> OptionAnswers { get; set; }
 
         public DbSet<TypeQuestion> TypeQuestions { get; set; }
 
-        public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
+        public DbSet<UserAnswer> UserAnswers { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            
+            modelBuilder.Entity<Unit>()
+             .HasMany(c => c.Lecturers).WithMany(i => i.Units)
+             .Map(t => t.MapLeftKey("UnitID")
+                 .MapRightKey("LecturerID")
+                 .ToTable("UnitLecturer"));
+
+            modelBuilder.Entity<Question>()
+            .HasMany(c => c.Questionnaires).WithMany(i => i.Questions)
+            .Map(t => t.MapLeftKey("QuestionID")
+                .MapRightKey("QuestionnaireID")
+                .ToTable("QuestionnaireQuestion"));
+
+            
+
+        }
     }
 }

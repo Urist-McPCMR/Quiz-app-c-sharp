@@ -9,6 +9,8 @@ namespace QuizApp.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        
         public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

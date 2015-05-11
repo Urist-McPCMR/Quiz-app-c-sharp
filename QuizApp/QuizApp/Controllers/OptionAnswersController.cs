@@ -18,7 +18,8 @@ namespace QuizApp.Controllers
         // GET: OptionAnswers
         public ActionResult Index()
         {
-            return View(db.OptionAnswers.ToList());
+            var optionAnswers = db.OptionAnswers.Include(o => o.Question);
+            return View(optionAnswers.ToList());
         }
 
         // GET: OptionAnswers/Details/5
@@ -39,6 +40,7 @@ namespace QuizApp.Controllers
         // GET: OptionAnswers/Create
         public ActionResult Create()
         {
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Option")] OptionAnswer optionAnswer)
+        public ActionResult Create([Bind(Include = "ID,Option,QuestionID")] OptionAnswer optionAnswer)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace QuizApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title", optionAnswer.QuestionID);
             return View(optionAnswer);
         }
 
@@ -71,6 +74,7 @@ namespace QuizApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title", optionAnswer.QuestionID);
             return View(optionAnswer);
         }
 
@@ -79,7 +83,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Option")] OptionAnswer optionAnswer)
+        public ActionResult Edit([Bind(Include = "ID,Option,QuestionID")] OptionAnswer optionAnswer)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace QuizApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.QuestionID = new SelectList(db.Questions, "QuestionID", "Title", optionAnswer.QuestionID);
             return View(optionAnswer);
         }
 

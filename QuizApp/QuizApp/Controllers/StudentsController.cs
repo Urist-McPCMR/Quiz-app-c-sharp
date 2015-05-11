@@ -18,7 +18,8 @@ namespace QuizApp.Controllers
         // GET: Students
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            var students = db.Students.Include(s => s.Course);
+            return View(students.ToList());
         }
 
         // GET: Students/Details/5
@@ -39,6 +40,7 @@ namespace QuizApp.Controllers
         // GET: Students/Create
         public ActionResult Create()
         {
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Email,Password")] Student student)
+        public ActionResult Create([Bind(Include = "StudentID,StudentNumber,FirstName,LastName,Email,Password,CourseID")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace QuizApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", student.CourseID);
             return View(student);
         }
 
@@ -71,6 +74,7 @@ namespace QuizApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", student.CourseID);
             return View(student);
         }
 
@@ -79,7 +83,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,Password")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentID,StudentNumber,FirstName,LastName,Email,Password,CourseID")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace QuizApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", student.CourseID);
             return View(student);
         }
 
