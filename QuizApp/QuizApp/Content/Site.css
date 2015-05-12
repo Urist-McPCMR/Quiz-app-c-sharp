@@ -15,3 +15,43 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Set icone for View button*/
+.btnView
+{
+    background: url(../Images/btnView.png) no-repeat top left;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    text-indent: -9999px; /* hides the link text */
+}
+
+/*Set icone for Edit button*/
+.btnEdit
+{
+    background: url(../Images/btnEdit.png) no-repeat top left;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    text-indent: -9999px; /* hides the link text */
+}
+
+/*Set icone for Delete button*/
+.btnDel
+{
+    background: url(../Images/btnDel.png) no-repeat top left;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    text-indent: -999999999px; /* hides the link text */
+}
+
+/*Set icone for Add button*/
+.btnAdd
+{
+    background: url(../Images/btnAdd.png) no-repeat top left;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    text-indent: -999999999px; /* hides the link text */
+}
