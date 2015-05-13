@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -29,11 +26,14 @@
             @Html.DisplayFor(modelItem => item.Option)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btnEdit" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btnView" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btnDel" })
         </td>
     </tr>
 }
 
 </table>
+<p>
+    @Html.ActionLink(" Create New ", "Create", null, new { @class = "btn btn-info btn-sm;glyphicon glyphicon-plus" })
+</p>
