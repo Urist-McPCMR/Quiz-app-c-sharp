@@ -61,6 +61,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }, new { @class = "btnEdit" }) |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info btn-sm;glyphicon" })
 </p>
