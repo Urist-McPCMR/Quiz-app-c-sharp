@@ -58,6 +58,17 @@
             @Html.DisplayFor(model => model.IsAdm)
         </dd>
 
+        <dt>
+            List of Units
+        </dt>
+
+        @foreach (var unit in Model.Units)
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => unit.Name)
+            </dd>
+        }        
+
     </dl>
 </div>
 <p>

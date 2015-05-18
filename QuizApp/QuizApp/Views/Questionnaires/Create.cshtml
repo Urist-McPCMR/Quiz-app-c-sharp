@@ -41,6 +41,39 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        <td colspan="3">
+                            <label>List of Questions</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        @{
+                            int cnt = 0;
+                            List<QuizApp.ViewModels.AssignedQuestionData> questions = ViewBag.Questions;
+
+                            foreach (var question in questions)
+                            {
+                                if (cnt++ % 3 == 0){
+                                    @:</tr><tr>
+                                }
+                                @:<td>
+                                    <input type="checkbox"
+                                       name="selectedQuestions"
+                                       value="@question.QuestionID"
+                                       @(Html.Raw(question.Assigned ? "checked=\"checked\"" : "")) />
+                                       @question.Title
+                                @:</td>
+                            }
+                            @:</tr>
+                        }
+                </table>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-info btn-sm" />
             </div>
         </div>

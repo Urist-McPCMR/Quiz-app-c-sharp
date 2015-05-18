@@ -9,14 +9,22 @@
 <table class="table">
     <tr>
         <th>
-                ID  
+            ID  
         </th>
-        <th>   Name 
+        <th>   
+            Name 
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th></th>
+
+        <th>
+            Units
+        </th>
+
+        <th>
+            Options
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -25,18 +33,23 @@
             @Html.DisplayFor(modelItem => item.LecturerNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FirstName). @Html.DisplayFor(modelItem => item.LastName)
+            @Html.DisplayFor(modelItem => item.FullName)
         </td>
         
         <td>
             @Html.DisplayFor(modelItem => item.Email)
-        </td>
-       
+        </td> 
+
+        <td>
+            @foreach (var unit in item.Units) {
+                @Html.DisplayFor(modelItem => unit.Name)
+            }
+        </td>       
        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btnEdit" }) |
             @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btnView" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btnDel" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
 }
