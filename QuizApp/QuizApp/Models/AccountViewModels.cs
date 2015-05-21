@@ -38,8 +38,7 @@ namespace QuizApp.Models
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Lecturer Number")]
         public string Email { get; set; }
 
         [Required]
