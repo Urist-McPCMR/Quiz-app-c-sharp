@@ -18,14 +18,46 @@ else
 <div class="row">
     <div class="col-md-4">
         <h2>Import Student</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <form action="http://www.cs.tut.fi/cgi-bin/run/~jkorpela/echo.cgi"
+			enctype="multipart/form-data" method="post">
+			<p>
+				Select a file:<br>
+				<input type="file" name="datafile" size="40">
+			</p>
+			<div>
+				<input type="submit" value="Send">
+			</div>
+		</form>
         <hr>
     </div>
     @if (((Lecturer)Session["User"]).IsAdm)
     {
     <div class="col-md-4">
         <h2>Import unit</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <form action="http://www.cs.tut.fi/cgi-bin/run/~jkorpela/echo.cgi"
+			enctype="multipart/form-data" method="post">
+			<p>
+				Select a file:<br>
+				<input type="file" name="datafile" size="40">
+			</p>
+			<div>
+				<input type="submit" value="Send">
+			</div>
+		</form>
+        <hr>
+    </div>
+	    <div class="col-md-4">
+        <h2>Import Lecturer</h2>
+                <form action="http://www.cs.tut.fi/cgi-bin/run/~jkorpela/echo.cgi"
+			enctype="multipart/form-data" method="post">
+			<p>
+				Select a file:<br>
+				<input type="file" name="datafile" size="40">
+			</p>
+			<div>
+				<input type="submit" value="Send">
+			</div>
+		</form>
         <hr>
     </div>
     }
