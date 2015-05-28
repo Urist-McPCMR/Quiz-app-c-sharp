@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 @using Microsoft.AspNet.Identity
 @using QuizApp.DAL;
+@using QuizApp.Models
 @{QuizContext db = new QuizContext();}
 
 <html>
@@ -27,14 +28,14 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                        @if (Request.IsAuthenticated)
+                        @if (Session["User"] != null)
                         {
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                             <li>@Html.ActionLink("Students", "Index", "Students")</li>
                             <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
                             <li>@Html.ActionLink("Questionnaires", "Index", "Questionnaires")</li>
                             <li>@Html.ActionLink("Units", "Index", "Units")</li>
-                            if (db.Lecturers.Find(User.Identity.GetUserId()).IsAdm)
+                            if (((Lecturer)Session["User"]).IsAdm)
                             {
                                 <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
                                 <li>@Html.ActionLink("Lecturers", "Index", "Lecturers")</li>
