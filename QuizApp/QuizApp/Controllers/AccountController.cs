@@ -59,7 +59,7 @@ namespace QuizApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                Lecturer lect = db.Lecturers.SqlQuery("SELECT * FROM Lecturer WHERE LecturerNumber = '" + model.Email + "'").ToList()[0];
+                Lecturer lect = db.Lecturers.SqlQuery("SELECT * FROM Lecturer WHERE LecturerNumber = '" + model.Email + "'").Single();
                 if (lect.Password == model.Password)
                 {
                     Session["User"] = lect;
@@ -533,7 +533,7 @@ namespace QuizApp.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("HomeLecturer", "Home");
             }
         }
 

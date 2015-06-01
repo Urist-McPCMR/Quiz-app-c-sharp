@@ -22,34 +22,39 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Quiz Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (Session["User"] == null)
+                { 
+                    @Html.ActionLink("Quiz Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+               
+                @if (Session["User"] != null)
+                {
+                    @Html.ActionLink("Quiz Application", "HomeLecturer", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+               
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <ul class="nav navbar-nav">                    
+                    @if (Session["User"] == null)
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    }
+
+                    @if (Session["User"] != null)
+                    {
+                        <li>@Html.ActionLink("Home", "HomeLecturer", "Home")</li>
+                    }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                        @if (Session["User"] != null)
-                        {
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Students", "Index", "Students")</li>
-                            <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
-                            <li>@Html.ActionLink("Questionnaires", "Index", "Questionnaires")</li>
-                            <li>@Html.ActionLink("Units", "Index", "Units")</li>
-                            if (((Lecturer)Session["User"]).IsAdm)
-                            {
-                                <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
-                                <li>@Html.ActionLink("Lecturers", "Index", "Lecturers")</li>
-                            }
-                        }
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="text-center">
             <p>&copy; @DateTime.Now.Year - Quiz Application</p>
         </footer>
     </div>

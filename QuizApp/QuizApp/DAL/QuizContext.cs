@@ -1,9 +1,11 @@
-﻿using QuizApp.Models;
+﻿using MySql.Data.Entity;
+using QuizApp.Models;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace QuizApp.DAL
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class QuizContext : DbContext
     {
         public QuizContext() : base("QuizContext")
