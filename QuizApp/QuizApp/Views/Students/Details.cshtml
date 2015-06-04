@@ -4,63 +4,72 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="row row-offcanvas row-offcanvas-right">
+    <div class="col-xs-12">
+        <div class="jumbotron text-center">
+            <h1>Details Student Page</h1>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        @Html.Partial("_Menu")
+        <div class="col-sm-10">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Course.Name)
+                    </dt>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Course.Name)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Course.Name)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Course.Name)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StudentNumber)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentNumber)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.StudentNumber)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.StudentNumber)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Password)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                </dl>
+            </div>
+            <p class="text-center">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }, new { @class = "btn btn-primary btn-sm;glyphicon" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-sm;glyphicon" })
+            </p>
 
-    </dl>
+        </div><!--/row-->
+    </div><!--/.col-xs-12.col-sm-9-->
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }, new { @class = "btnEdit" }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info btn-sm;glyphicon" })
-</p>

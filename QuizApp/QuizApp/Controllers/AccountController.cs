@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using QuizApp.Models;
+using QuizApp.DAL;
 
 namespace QuizApp.Controllers
 {
@@ -18,6 +19,7 @@ namespace QuizApp.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private QuizContext db = new QuizContext();
 
         public AccountController()
         {
@@ -57,11 +59,14 @@ namespace QuizApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
-                if (user != null)
+                Lecturer lect = db.Lecturers.SqlQuery("SELECT * FROM Lecturer WHERE LecturerNumber = '" + model.Email + "'").Single();
+                if (lect.Password == model.Password)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    Session["User"] = lect;
+                    
+                        //await SignInAsync(user, model.RememberMe);
+                        return RedirectToLocal(returnUrl);
+                   
                 }
                 else
                 {
@@ -433,10 +438,15 @@ namespace QuizApp.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
+            Session.Abandon();
+            ModelState.Clear();
+            Lecturer temp = new Lecturer();
+            temp.ID = "-1";
+            Session["User"] = temp;
+            
             return RedirectToAction("Index", "Home");
         }
 
@@ -523,7 +533,7 @@ namespace QuizApp.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("HomeLecturer", "Home");
             }
         }
 

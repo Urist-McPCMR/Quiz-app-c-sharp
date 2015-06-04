@@ -10,12 +10,31 @@ using QuizApp.DAL;
 using QuizApp.Models;
 using QuizApp.ViewModels;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Owin;
+using System.Threading.Tasks;
 
 namespace QuizApp.Controllers
 {
     public class LecturersController : Controller
     {
         private QuizContext db = new QuizContext();
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
 
         // GET: Lecturers
         public ActionResult Index()
@@ -42,6 +61,7 @@ namespace QuizApp.Controllers
         public ActionResult Create()
         {
             var lecturer = new Lecturer();
+
             lecturer.Units = new List<Unit>();
             PopulateAssignedUnitData(lecturer);
             return View();
@@ -50,8 +70,19 @@ namespace QuizApp.Controllers
         // POST: Lecturers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LecturerNumber,FirstName,LastName,Email,Password,IsAdm")] Lecturer lecturer, string[] selectedUnits)
+        public async Task<ActionResult> Create([Bind(Include = "LecturerNumber,FirstName,LastName,Email,Password,IsAdm")] Lecturer lecturer, string[] selectedUnits)
         {
+            var user = new ApplicationUser() { UserName = lecturer.LecturerNumber.ToString(), Email = lecturer.Email };
+            IdentityResult result = await UserManager.CreateAsync(user, lecturer.Password);
+
+            ApplicationDbContext adc = new ApplicationDbContext();
+            string q = "SELECT ID FROM AspNetUsers WHERE UserName = '" + user.UserName + "'";
+            DbRawSqlQuery<string> id = adc.Database.SqlQuery<string>(q);
+
+          
+
+
+            lecturer.ID = id.ToList<string>()[0];
             if (selectedUnits != null)
             {
                 lecturer.Units = new List<Unit>();
@@ -73,7 +104,7 @@ namespace QuizApp.Controllers
         }
 
         // GET: Lecturers/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -99,7 +130,7 @@ namespace QuizApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, string[] selectedUnits)
+        public ActionResult Edit(string id, string[] selectedUnits)
         {
             if (id == null)
             {

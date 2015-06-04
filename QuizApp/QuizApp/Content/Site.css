@@ -43,15 +43,5 @@ textarea {
     display: inline-block;
     width: 24px;
     height: 24px;
-    text-indent: -999999999px; /* hides the link text */
-}
-
-/*Set icone for Add button*/
-.btnAdd
-{
-    background: url(../Images/btnAdd.png) no-repeat top left;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    text-indent: -999999999px; /* hides the link text */
+    text-indent: -9999px; /* hides the link text */
 }

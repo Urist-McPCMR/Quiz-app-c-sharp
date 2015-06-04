@@ -26,5 +26,10 @@ namespace QuizApp.Controllers
 
             return View();
         }
+
+        public ActionResult HomeLecturer()
+        {
+            return View();
+        }
     }
 }
