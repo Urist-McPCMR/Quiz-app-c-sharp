@@ -223,3 +223,8 @@ C:\Users\Gustavo\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizA
 C:\Users\Gustavo\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.dll
 C:\Users\Gustavo\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.pdb
 C:\Users\Gustavo\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.csprojResolveAssemblyReference.cache
+C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\bin\MySql.Data.dll
+C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\bin\MySql.Data.Entity.EF6.dll
+C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.csprojResolveAssemblyReference.cache
+C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.Migrations.InitialCreate.resources
+C:\Users\041402822\Desktop\GitHub\Quiz-app-c-sharp\QuizApp\QuizApp\obj\Debug\QuizApp.csproj.GenerateResource.Cache
